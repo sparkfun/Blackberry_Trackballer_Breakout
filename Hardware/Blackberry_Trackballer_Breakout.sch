@@ -17829,6 +17829,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="147.32" y1="185.42" x2="147.32" y2="142.24" width="0.2032" layer="97" style="shortdash"/>
 <wire x1="147.32" y1="142.24" x2="248.92" y2="142.24" width="0.2032" layer="97" style="shortdash"/>
 <wire x1="248.92" y1="142.24" x2="248.92" y2="139.7" width="0.2032" layer="97" style="shortdash"/>
+<text x="160.02" y="147.32" size="1.778" layer="97">VCC Range: 2.5V - 5.25V</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>

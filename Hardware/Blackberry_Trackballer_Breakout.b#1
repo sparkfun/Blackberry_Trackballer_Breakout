@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.1.0">
+<eagle version="6.4">
 <drawing>
 <settings>
 <setting alwaysvectorfont="yes"/>
@@ -56,7 +56,7 @@
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
-<layer number="49" name="Reference" color="13" fill="1" visible="yes" active="yes"/>
+<layer number="49" name="Reference" color="13" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="yes"/>
 <layer number="51" name="tDocu" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
@@ -176,19 +176,19 @@
 <text x="26.162" y="21.209" size="1.016" layer="21" ratio="15" rot="R270">BLU</text>
 <text x="12.83335" y="-12.991590625" size="1.778" layer="51" font="vector" ratio="10">Nathan Seidle</text>
 <text x="-5.8412375" y="-15.617696875" size="1.778" layer="51" font="vector" ratio="10">Revised by: Patrick Alberts</text>
-<text x="3.6426125" y="7.1254625" size="0.8128" layer="22" font="vector" ratio="15" rot="MR180">Blackberry Trackballer Breakout</text>
+<text x="3.2616125" y="8.5224625" size="0.8128" layer="22" font="vector" ratio="11" rot="MR180">Blackberry Trackballer Breakout</text>
 <text x="4.78434375" y="1.554734375" size="0.8128" layer="16" font="vector" ratio="15" rot="MR180">V13</text>
-<text x="21.59" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">GRN</text>
-<text x="19.05" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">WHT</text>
-<text x="13.97" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">UP</text>
-<text x="16.51" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">DWN</text>
-<text x="8.89" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">LFT</text>
-<text x="11.43" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">RHT</text>
-<text x="6.35" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">BTN</text>
-<text x="3.81" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">GND</text>
-<text x="1.27" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">VCC</text>
-<text x="24.13" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">RED</text>
-<text x="26.67" y="21.59" size="1.016" layer="22" ratio="15" rot="MR90" align="center-right">BLU</text>
+<text x="21.082" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">GRN</text>
+<text x="18.542" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">WHT</text>
+<text x="13.462" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">UP</text>
+<text x="16.002" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">DWN</text>
+<text x="8.382" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">LFT</text>
+<text x="10.922" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">RHT</text>
+<text x="5.842" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">BTN</text>
+<text x="3.302" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">GND</text>
+<text x="0.762" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">VCC</text>
+<text x="23.622" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">RED</text>
+<text x="26.162" y="18.415" size="1.016" layer="22" ratio="15" rot="MR90">BLU</text>
 <dimension x1="-5.08" y1="24.13" x2="-5.08" y2="0" x3="-6.35" y3="12.065" textsize="1.778" textratio="15" layer="47"/>
 <dimension x1="0" y1="30.48" x2="27.94" y2="30.48" x3="13.97" y3="31.75" textsize="1.778" textratio="15" layer="47"/>
 </plain>
@@ -1690,9 +1690,6 @@ design rules under a new name.</description>
 <autorouter>
 <pass name="Default">
 <param name="RoutingGrid" value="50mil"/>
-<param name="AutoGrid" value="1"/>
-<param name="Efforts" value="0"/>
-<param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
 <param name="PrefDir.1" value="|"/>
 <param name="PrefDir.2" value="0"/>
@@ -1848,7 +1845,7 @@ design rules under a new name.</description>
 <element name="JP2" library="SparkFun" package="1X04" value="" x="26.67" y="22.86" rot="R180"/>
 <element name="JP1" library="SparkFun" package="1X03" value="" x="1.27" y="22.86"/>
 <element name="FRAME1" library="SparkFun-Aesthetics" package="CREATIVE_COMMONS" value="FRAME-LETTER" x="-17.252121875" y="-12.7"/>
-<element name="LOGO1" library="SparkFun-Aesthetics" package="SFE_LOGO_NAME_FLAME_.2" value="SFE_LOGO_NAME_FLAME.2_INCH" x="25.654" y="7.747" rot="MR0"/>
+<element name="LOGO1" library="SparkFun-Aesthetics" package="SFE_LOGO_NAME_FLAME_.2" value="SFE_LOGO_NAME_FLAME.2_INCH" x="25.654" y="9.271" rot="MR0"/>
 <element name="LOGO2" library="SparkFun-Aesthetics" package="OSHW-LOGO-S" value="OSHW-LOGOS" x="1.905" y="11.938"/>
 <element name="U$1" library="SparkFun" package="STAND-OFF" value="STAND-OFF" x="2.54" y="16.51"/>
 <element name="U$8" library="SparkFun" package="STAND-OFF" value="STAND-OFF" x="25.4" y="16.51"/>

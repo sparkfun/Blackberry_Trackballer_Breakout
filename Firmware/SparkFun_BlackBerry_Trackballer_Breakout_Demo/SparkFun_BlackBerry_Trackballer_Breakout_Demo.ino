@@ -26,10 +26,15 @@ Distributed as-is; no warranty is given.
 
 int buttonClick =0;
 
-unsigned long mouse_Lft;
-unsigned long mouse_Rht;
-unsigned long mouse_Up;
-unsigned long mouse_Dwn;
+int mouse_Lft_reading =0;
+int mouse_Rht_reading =0;
+int mouse_Up_reading =0;
+int mouse_Dwn_reading =0;
+
+int mouse_Lft =0;
+int mouse_Rht =0;
+int mouse_Up =0;
+int mouse_Dwn =0;
 
 /*********************Setup Loop*************************/
 void setup() {
@@ -80,11 +85,35 @@ void setup() {
 void loop() {
   
  
- mouse_Lft = pulseIn(Lft, HIGH, 40000);
- mouse_Rht = pulseIn(Rht, HIGH, 40000);
- mouse_Up = pulseIn(Up, HIGH, 40000);
- mouse_Dwn = pulseIn(Dwn, HIGH, 40000);
+ mouse_Lft_reading = digitalRead(Lft);
+ mouse_Rht_reading = digitalRead(Rht);
+ mouse_Up_reading = digitalRead(Up);
+ mouse_Dwn_reading = digitalRead(Dwn);
  buttonClick = digitalRead(Btn);
+ 
+ if (mouse_Lft_reading == HIGH)
+ {
+   mouse_Lft =1;
+ }
+ else mouse_Lft = 0;
+ 
+ if (mouse_Rht_reading == HIGH)
+ {
+   mouse_Rht = 1;
+ }
+ else mouse_Rht = 0;
+ 
+ if (mouse_Up_reading == HIGH)
+ {
+   mouse_Up = 1;
+ }
+ else mouse_Up = 0;
+ 
+ if (mouse_Dwn_reading == HIGH)
+ {
+   mouse_Dwn = 1;
+ }
+ else mouse_Dwn =0;
  
 Serial.print("Trackball Pulses (ms): \t Lft=");  
 Serial.print(mouse_Lft);
@@ -99,4 +128,6 @@ if (buttonClick == LOW)
   {
     Serial.println("Click");  
   }
+  
+ delay(200); 
 }

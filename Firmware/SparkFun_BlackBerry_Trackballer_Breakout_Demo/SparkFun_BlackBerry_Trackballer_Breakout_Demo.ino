@@ -24,13 +24,12 @@ Distributed as-is; no warranty is given.
 #define RED_LED 9
 #define BLU_LED 10
 
-int buttonState =0;
-int Lft_HallEffect =0;
-int Rht_HallEffect =0;
-int Up_HallEffect =0;
-int Dwn_HallEffect =0;
+int buttonClick =0;
 
-int  mouse_Settings[4]; 
+unsigned long mouse_Lft;
+unsigned long mouse_Rht;
+unsigned long mouse_Up;
+unsigned long mouse_Dwn;
 
 /*********************Setup Loop*************************/
 void setup() {
@@ -51,9 +50,10 @@ void setup() {
   digitalWrite(RED_LED, LOW);
   digitalWrite(BLU_LED, LOW);
   
-  Serial.begin(115200); //Start Serial port for debugging. 
+  Serial.begin(9600); //Start Serial port for debugging. 
   Serial.println("Begin Trackballer Demo");
   
+  Serial.println("Turn on LEDs individually");
   //Demo each LED by turning them on individually for one second. 
   digitalWrite(WHT_LED, HIGH);
   delay(1000);
@@ -71,7 +71,7 @@ void setup() {
   delay(1000);
   digitalWrite(BLU_LED, LOW);
   
-  Serial.println("Lft, Rht, Up, Dwn, Btn");
+  Serial.println("Begin Trackball tracking");
   
 }
 
@@ -79,45 +79,24 @@ void setup() {
 /*********************Main Loop*************************/
 void loop() {
   
-//  //Read button state, output to serial monitor if clicked
-//  buttonState = digitalRead(Btn);
-//  if (buttonState == LOW){
-//    Serial.println("Button click");
-//  }
-//  
-//   Lft_HallEffect = digitalRead(Lft);
-//  if (Lft_HallEffect == LOW){
-//    Serial.println("Left");
-//  }
-//  
-//   Rht_HallEffect = digitalRead(Rht);
-//  if (Rht_HallEffect == LOW){
-//    Serial.println("Right");
-//  }
-//  
-//   Up_HallEffect = digitalRead(Up);
-//  if (Up_HallEffect == LOW){
-//    Serial.println("Up");
-//  }
-//  
-//   Dwn_HallEffect = digitalRead(Dwn);
-//  if (Dwn_HallEffect == LOW){
-//    Serial.println("Dwn");
-//  }
-  
-// buttonState = digitalRead(Btn);
-// Lft_HallEffect = digitalRead(Lft);
-// Rht_HallEffect = digitalRead(Rht);
-// Up_HallEffect = digitalRead(Up);
-// Dwn_HallEffect = digitalRead(Dwn);
  
- mouse_Settings[0] = digitalRead(Lft);
- mouse_Settings[1] = digitalRead(Rht);
- mouse_Settings[2] = digitalRead(Up);
- mouse_Settings[3] = digitalRead(Dwn);
- mouse_Settings[4] = digitalRead(Btn);
-  
-Serial.println(mouse_Settings);
+ mouse_Lft = pulseIn(Lft, HIGH, 40000);
+ mouse_Rht = pulseIn(Rht, HIGH, 40000);
+ mouse_Up = pulseIn(Up, HIGH, 40000);
+ mouse_Dwn = pulseIn(Dwn, HIGH, 40000);
+ buttonClick = digitalRead(Btn);
+ 
+Serial.print("Trackball Pulses (ms): \t Lft=");  
+Serial.print(mouse_Lft);
+Serial.print(" \t Rht=");
+Serial.print(mouse_Rht);
+Serial.print(" \t Up=");
+Serial.print(mouse_Up);
+Serial.print(" \t Dwn=");
+Serial.print(mouse_Dwn);
 Serial.println();
-
+if (buttonClick == LOW)
+  {
+    Serial.println("Click");  
+  }
 }

@@ -11,7 +11,7 @@ Distributed as-is; no warranty is given.
 ***************************************************************************/
 
 //Define Trackballer Breakout pin connections to Arduino
-#define Btn 11
+#define Btn 2
 #define Lft 3
 #define Rht 4
 #define Up 5

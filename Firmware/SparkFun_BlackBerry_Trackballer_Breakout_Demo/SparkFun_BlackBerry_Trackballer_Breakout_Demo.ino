@@ -14,28 +14,23 @@ Distributed as-is; no warranty is given.
 ***************************************************************************/
 
 //Define breakout pin connections to Arduino
-#define Btn 2
-#define Lft 3
-#define Rht 4
-#define Up 5
-#define Dwn 6
-#define WHT_LED 7
-#define GRN_LED 8
-#define RED_LED 9
-#define BLU_LED 10
+#define Lft 4
+#define Rht 5
+#define Up 6
+#define Dwn 7
+#define Btn 3
+#define WHT_LED 8
+#define GRN_LED 9
+#define RED_LED 10
+#define BLU_LED 11
 
 int buttonClick =0;
-
-int mouse_Lft_reading =0;
-int mouse_Rht_reading =0;
-int mouse_Up_reading =0;
-int mouse_Dwn_reading =0;
-
-int mouse_Lft =0;
-int mouse_Rht =0;
-int mouse_Up =0;
-int mouse_Dwn =0;
-
+volatile int x_count = 0;
+volatile int y_count = 0;
+int scroll_Up =0;
+int scroll_Dwn =0;
+int scroll_Rht =0;
+int scroll_Lft =0;
 /*********************Setup Loop*************************/
 void setup() {
   
@@ -78,6 +73,7 @@ void setup() {
   
   Serial.println("Begin Trackball tracking");
   
+  attachInterrupt(digitalPinToInterrupt(2), tracking, CHANGE);
 }
 
 
@@ -85,49 +81,37 @@ void setup() {
 void loop() {
   
  
- mouse_Lft_reading = digitalRead(Lft);
- mouse_Rht_reading = digitalRead(Rht);
- mouse_Up_reading = digitalRead(Up);
- mouse_Dwn_reading = digitalRead(Dwn);
- buttonClick = digitalRead(Btn);
- 
- if (mouse_Lft_reading == HIGH)
- {
-   mouse_Lft =1;
- }
- else mouse_Lft = 0;
- 
- if (mouse_Rht_reading == HIGH)
- {
-   mouse_Rht = 1;
- }
- else mouse_Rht = 0;
- 
- if (mouse_Up_reading == HIGH)
- {
-   mouse_Up = 1;
- }
- else mouse_Up = 0;
- 
- if (mouse_Dwn_reading == HIGH)
- {
-   mouse_Dwn = 1;
- }
- else mouse_Dwn =0;
- 
-Serial.print("Trackball Pulses (ms): \t Lft=");  
-Serial.print(mouse_Lft);
-Serial.print(" \t Rht=");
-Serial.print(mouse_Rht);
-Serial.print(" \t Up=");
-Serial.print(mouse_Up);
-Serial.print(" \t Dwn=");
-Serial.print(mouse_Dwn);
-Serial.println();
-if (buttonClick == LOW)
+  buttonClick = digitalRead(Btn);
+  if (buttonClick == LOW)
+    {
+      Serial.println("Click");  
+    }
+    scroll_Up = digitalRead(Up);
+    scroll_Dwn = digitalRead(Dwn);
+    scroll_Rht = digitalRead(Rht);
+    scroll_Lft = digitalRead(Lft);
+}
+
+void tracking()
+{
+  if(scroll_Up == HIGH)
   {
-    Serial.println("Click");  
+    y_count= ++y_count;
   }
-  
- delay(200); 
+  else if(scroll_Dwn == HIGH)
+  {
+    y_count= --y_count;
+  }
+  else if (scroll_Rht == HIGH)
+  {
+    x_count = ++x_count;
+  }
+  else
+  {
+    x_count = --x_count;
+  }
+  Serial.print("X-count: ");
+  Serial.print(x_count);
+  Serial.print("\t Y-count: ");
+  Serial.println(y_count);
 }

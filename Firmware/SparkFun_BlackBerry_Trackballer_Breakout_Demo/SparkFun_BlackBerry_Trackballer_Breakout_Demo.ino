@@ -3,18 +3,15 @@ SparkFun BlackBerry Trackballer Breakout Demo
 Toni Klopfenstein @ SparkFun Electronics
 March 2015
 https://github.com/sparkfun/Blackberry_Trackballer_Breakout
-
 This demo shows all the basic functionality of the SparkFun BlackBerry Trackballer Breakout (https://www.sparkfun.com/products/13169).
-
 Development environment specifics:
 Developed in Arduino 1.6.0
-
 This code is beerware; if you see me (or any other SparkFun employee) at the local, and you've found our code helpful, please buy us a round!
 Distributed as-is; no warranty is given.
 ***************************************************************************/
 
-//Define breakout pin connections to Arduino
-#define Btn 2
+//Define Trackballer Breakout pin connections to Arduino
+#define Btn 11
 #define Lft 3
 #define Rht 4
 #define Up 5
@@ -24,20 +21,19 @@ Distributed as-is; no warranty is given.
 #define RED_LED 9
 #define BLU_LED 10
 
-int buttonClick =0;
-
-//int mouse_Lft;
-//int mouse_Rht;
-//int mouse_Up;
-//int mouse_Dwn;
-
-volatile int x_count = 0;
-volatile int y_count = 0;
+//Define variables used in sketch
+int buttonClick;
+unsigned long mouse_Lft;
+unsigned long mouse_Rht;
+unsigned long mouse_Up;
+unsigned long mouse_Dwn;
+int x_position;
+int y_position;
 
 /*********************Setup Loop*************************/
 void setup() {
   
-  //Define pin functionality
+  //Define pin functionality on the Arduino
   pinMode(Btn, INPUT);
   pinMode(Lft, INPUT);
   pinMode(Rht, INPUT);
@@ -48,20 +44,18 @@ void setup() {
   pinMode(RED_LED, OUTPUT);
   pinMode(BLU_LED, OUTPUT);
   
+  //Pull LED pins low to prevent flickering
   digitalWrite(WHT_LED, LOW);
   digitalWrite(GRN_LED, LOW);
   digitalWrite(RED_LED, LOW);
   digitalWrite(BLU_LED, LOW);
-  digitalWrite(Lft, LOW);
-  digitalWrite(Rht, LOW);
-  digitalWrite(Up, LOW);
-  digitalWrite(Dwn, LOW);
   
-  Serial.begin(9600); //Start Serial port for debugging. 
+  //Start Serial port for debugging. 
+  Serial.begin(9600); 
   Serial.println("Begin Trackballer Demo");
-  
-  Serial.println("Turn on LEDs individually");
+ 
   //Demo each LED by turning them on individually for one second. 
+  Serial.println("Turn on LEDs individually");
   digitalWrite(WHT_LED, HIGH);
   delay(1000);
   digitalWrite(WHT_LED, LOW);
@@ -79,51 +73,51 @@ void setup() {
   digitalWrite(BLU_LED, LOW);
   
   Serial.println("Begin Trackball tracking");
-  
-  attachInterrupt(digitalPinToInterrupt(Rht), mouse_Rht, CHANGE);
-//  attachInterrupt(digitalPinToInterrupt(Lft), mouse_Lft, CHANGE);
-//  attachInterrupt(digitalPinToInterrupt(Up), mouse_Up, CHANGE);
-//  attachInterrupt(digitalPinToInterrupt(Dwn), mouse_Dwn, CHANGE);
-//  
 }
 
 
 /*********************Main Loop*************************/
 void loop() {
- 
-//Serial.print("Trackball Position: \t X-position");  
-//Serial.print(x_count);
-//Serial.print(" \t Y-position");
-//Serial.print(y_count);
-//Serial.println();
-
-buttonClick = digitalRead(Btn);
-if (buttonClick == LOW)
+  
+  //Wait for 2ms on each direction pin for movement.
+  //Pins are driven HIGH by the breakout board.
+  //pulseIn measures the length of each pulse in microseconds. 
+  mouse_Lft = pulseIn(Lft, HIGH, 20000);
+  mouse_Rht = pulseIn(Rht, HIGH, 20000);
+  mouse_Up = pulseIn(Up, HIGH, 20000);
+  mouse_Dwn = pulseIn(Dwn, HIGH, 20000);
+  
+  //Determine if there was movement in any direction. 
+  //If movement occurred, adjust x/y coordinates based on movements.
+  //Directionality is based off of an x/y plane (i.e., Up 1 unit and Right 1 unit = (1,1))
+  if (mouse_Lft > 0)
+  {
+    x_position= --x_position;
+  }
+  if (mouse_Rht > 0)
+  {
+    x_position= ++x_position;
+  }
+  if (mouse_Up > 0)
+  {
+    y_position= ++y_position;
+  }
+  if (mouse_Dwn > 0)
+  {
+    y_position= --y_position;
+  }
+  
+  //Output x/y coordinates to Serial terminal
+  Serial.print("Trackball Position: \t X-Position= ");  
+  Serial.print(x_position);
+  Serial.print(" \t Y-position= ");
+  Serial.print(y_position);
+  Serial.println();
+  
+  //Check for button click. If present, print to Serial monitor.
+  buttonClick = digitalRead(Btn);
+  if (buttonClick == LOW)
   {
     Serial.println("Click");  
   }
-}
-
-void mouse_Lft()
-{
-  x_count = --x_count;
-  Serial.println("Left");
-}
-
-void mouse_Rht()
-{
-  x_count = ++x_count;
-  Serial.println("Right");
-}
-
-void mouse_Up()
-{
-  y_count = ++y_count;
-  Serial.println("Up");
-}
-
-void mouse_Dwn()
-{
-  y_count = --y_count;
-  Serial.println("Dwn");
 }

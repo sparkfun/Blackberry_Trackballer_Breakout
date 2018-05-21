@@ -5,8 +5,7 @@ SparkFun BlackBerry Trackballer Breakout
 
 [*SparkFun BlackBerry Trackballer Breakout (COM-13169)*](https://www.sparkfun.com/products/13169)
 
-The SparkFun BlackBerry Trackballer Breakout gives you easy access to a trackball which measures up, down, left, and right movements, clicks on the board, as well as adding a bit of flair to your project with four built-in LEDs. 
-The trackballer breakout can be hooked into an Arduino compatible device to provide you with an intuitive direction controller.
+The SparkFun BlackBerry Trackballer Breakout gives you easy access to a trackball which measures up, down, left, and right movements, clicks on the board, as well as adding a bit of flair to your project with four built-in LEDs. The trackballer breakout can be hooked into an Arduino compatible device to provide you with an intuitive direction controller.
 
 Repository Contents
 -------------------
@@ -14,7 +13,6 @@ Repository Contents
 * **/Firmware** - Example Arduino code 
 * **/Hardware** - Eagle design files (.brd, .sch) for the main PCB, and the mounting PCB. 
 * **/Production** - Production panel files (.brd) for the main PCB. The mounting PCB did not need to be panelized. 
-
 
 Documentation
 --------------
@@ -24,8 +22,8 @@ Documentation
 
 Product Versions
 ----------------
-* [COM-13169](https://www.sparkfun.com/products/13169)- Version 1.3. Currently for sale. 
-* [COM-09320] (https://www.sparkfun.com/products/9320)- Version 1.2. Retired. 
+* [COM-13169](https://www.sparkfun.com/products/13169)- Version 1.3. Retired.
+* [COM-09320](https://www.sparkfun.com/products/9320)- Version 1.2. Retired. 
 
 License Information
 -------------------
